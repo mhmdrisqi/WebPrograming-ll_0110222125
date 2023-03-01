@@ -17,7 +17,7 @@
                 <th>tugas</th>
                 <th>uts</th>
                 <th>uas</th>
-                <th>total tilai</th>
+                <th>total nilai</th>
             </tr>
             <?php require_once("Proses_nilai.php") ?>
             <tr>
@@ -26,7 +26,7 @@
                 <td><?= $tugas; ?></td>
                 <td><?= $uts; ?></td>
                 <td><?= $uas; ?></td>
-                <td><?= $keterangan;?></td>
+                <td><?= $keterangan; ?></td>
             </tr>
         </table>
     </div>
