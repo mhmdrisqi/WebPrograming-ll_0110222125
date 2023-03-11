@@ -1,5 +1,5 @@
 <?php 
-$domisili = ["Jakarta","Bogor", "Depok", "Tanggerang","Bekasi"];
+$domisili = ["Jakarta","Bogor", "Depok", "Tanggerang","Bekasi "]; 
 
 $program_studi = [
     "TI"=> "Teknik Informatika",
@@ -8,14 +8,16 @@ $program_studi = [
 
 ];
 
-$skils = [
-    "HTML <br>" => 10,
-    "CSS <br>" => 10,
-    "Javascript <br>" => 20,
-    "RWD Bootstrap <br>" => 20,
-    "PHP <br>" => 30,
-    "Python <br>" => 30,
-    "Java" => 50
+$skills = [
+    "HTML" => 10,
+    "CSS" => 10,
+    "Javascript" => 20,
+    "RWD Bootstrap" => 20,
+    "PHP" => 30,
+    "Python" => 30,
+    "Java" => 50,
+    
 ];
 
 ?>
+

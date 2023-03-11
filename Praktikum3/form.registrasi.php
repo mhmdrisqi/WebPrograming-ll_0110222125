@@ -12,6 +12,7 @@
 </head>
 
 <body>
+    <div>
     <div class="container">
         <h2>Form Input IT club GDSC</h2>
         <form method="POST">
@@ -25,14 +26,14 @@
                 <label for="nama" class="col-4 col-form-label">Nama</label>
                 <div class="col-8">
                     <input id="nama" name="nama" placeholder="Masukan Nama " type="text" class="form-control"
-                        required="required">
+                        >
                 </div>
             </div>
             <div class="form-group row">
                 <label for="email" class="col-4 col-form-label">Email</label>
                 <div class="col-8">
                     <input id="email" name="email" placeholder="Masukan Email" type="text" class="form-control"
-                        required="required">
+                        >
                 </div>
             </div>
             <div class="form-group row">
@@ -40,12 +41,12 @@
                 <div class="col-8">
                     <div class="custom-control custom-radio custom-control-inline">
                         <input name="jenis_kelamin" id="jenis_kelamin_0" type="radio" class="custom-control-input"
-                            value="pria" required="required">
+                            value="pria">
                         <label for="jenis_kelamin_0" class="custom-control-label">Pria</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
                         <input name="jenis_kelamin" id="jenis_kelamin_1" type="radio" class="custom-control-input"
-                            value="wanita" required="required">
+                            value="wanita">
                         <label for="jenis_kelamin_1" class="custom-control-label">Wanita</label>
                     </div>
                 </div>
@@ -53,7 +54,7 @@
             <div class="form-group row">
                 <label for="program_studi" class="col-4 col-form-label">Program Study</label>
                 <div class="col-8">
-                    <select id="program_studi" name="program_studi" class="custom-select" required="required">
+                    <select id="program_studi" name="program_studi" class="custom-select">
                         <?php foreach ($program_studi as $key => $value) { ?>
                             <option value="<?= $key; ?>"><?= $value; ?></option>
                         <?php } ?>
@@ -63,16 +64,15 @@
             <div class="form-group row">
                 <label class="col-4">Skill Programming</label>
                 <div class="col-8">
-                    <?php foreach ($skils as $key => $value) { ?>
-                        <div class="custom-control custom-checkbox custom-control-inline">
-                            <input name="skill[]" id="skill_<?=$key;?>" type="checkbox" class="custom-control-input" value="<?= $key;?>">
-                            <label for="skill_<?=$key;?>" class="custom-control-label"><?= $key;?>
-                            </label>
-                        </div>
+                <?php foreach ($skills as $skill => $value) { ?>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input name="skill[]" id="<?= $skill ?>" type="checkbox" class="custom-control-input" value="<?= $skill ?>">
+                                    <label for="<?= $skill ?>" class="custom-control-label"><?= $skill ?></label>
                     <?php } ?>
                 </div>
             </div>
-
+            </div>
+            <div>
             <div class="form-group row">
                 <label for="domisili" class="col-4 col-form-label">Domisili</label>
                 <div class="col-8">
@@ -81,7 +81,6 @@
                             <option value="<?= $dom; ?>"><?= $dom; ?></option>
                         <?php } ?>
                     </select>
-                </div>
             </div>
             <div class="form-group row">
                 <div class="offset-4 col-8">
@@ -90,7 +89,7 @@
             </div>
         </form>
         <hr>
-        <table class="table table_bordered">
+        <table class="table table_bordered" style="border:1px ;" >
             <tr class="table-primary text-uppercase">
                 <th>nim</th>
                 <th>nama</th>
@@ -99,41 +98,62 @@
                 <th>domisili</th>
                 <th>Proram_study</th>
                 <th>Skill Programming</th>
+                <th>total_score</th>
+                <th>Kategory</th>
             </tr>
+            </div>
+            
             <?php
-            if (isset($_POST['submit'])) {
-                $nim = $_POST['nim'];
-                $nama = $_POST['nama'];
-                $email = $_POST['email'];
-                $jenis_kelamin = $_POST['jenis_kelamin'];
-                $domisili = $_POST['domisili'];
-                $program_studi = $_POST['program_studi'];
-                $skils = $_POST['skill']
-                ?>
-                <tr class="text-uppercase">
-                    <td>
-                        <?= $nim; ?>
-                    </td>
-                    <td>
-                        <?= $nama; ?>
-                    </td>
-                    <td>
-                        <?= $email; ?>
-                    </td>
-                    <td>
-                        <?= $jenis_kelamin; ?>
-                    </td>
-                    <td>
-                        <?= $domisili; ?>
-                    </td>
-                    <td>
-                        <?= $program_studi; ?>
-                    </td>
-                    <td>
-                        <?php foreach ($skils as $skils){echo $skils;}; ?>
-                    </td>
-                </tr>
-            <?php } ?>
+                    if (isset($_POST['submit'])) {
+                        $nim = $_POST['nim'];
+                        $nama = $_POST['nama'];
+                        $email = $_POST['email'];
+                        $jenis_kelamin = $_POST['jenis_kelamin'];
+                        $program_studi = $_POST['program_studi'];
+                        $domisili = $_POST['domisili'];
+                    ?>
+                        <tr>
+                            <td><?= $nim ?></td>
+                            <td><?= $nama ?></td>
+                            <td><?= $email ?></td>
+                            <td><?= $jenis_kelamin ?></td>
+                            <td><?= $program_studi ?></td>
+                            <td><?= $domisili ?></td>
+                            <td>
+                                <?php
+                                $skor = 0;
+                                if (isset($_POST['skill'])) {
+                                    foreach ($_POST['skill'] as $skill) {
+                                        foreach ($skills as $key => $value) {
+                                            if ($skill == $key) {
+                                                $skor  += $value;
+                                            }
+                                        }
+                                        echo $skill . ", ";
+                                    }
+                                }
+                                ?>
+                            </td>
+                            <td><?= $skor ?></td>
+                            <td>
+                                <?php
+                                if ($skor == 0) {
+                                    echo "Tidak lulus";
+                                } elseif ($skor > 0 && $skor <= 40) {
+                                    echo "Kurang";
+                                } elseif ($skor > 40 && $skor <= 60) {
+                                    echo "Cukup";
+                                } elseif ($skor > 60 && $skor <= 90) {
+                                    echo "baik";
+                                } elseif ($skor > 90 && $skor <= 140) {
+                                    echo "Sangat Baik";
+                                } else {
+                                    echo "error";
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                    <?php } ?>
         </table>
     </div>
 </body>
